@@ -1,0 +1,66 @@
+services:
+  api:
+    build: .
+    ports:
+      - "${PORT:-8080}:8080"
+    environment:
+      PORT: 8080
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_USER: "${DB_USER:-useremoney}"
+      DB_PASSWORD: "${DB_PASSWORD:-Password#123}"
+      DB_NAME: "${DB_NAME:-emoney}"
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: ""
+      JWT_SECRET: "${JWT_SECRET:-change-this-to-a-long-random-secret}"
+      JWT_EXPIRY_HOURS: "${JWT_EXPIRY_HOURS:-24}"
+      FIREBASE_CREDENTIALS_PATH: /app/firebase_service_account.json
+      FIREBASE_API_KEY: "${FIREBASE_API_KEY}"
+      SMTP_HOST: "${SMTP_HOST:-smtp.gmail.com}"
+      SMTP_PORT: "${SMTP_PORT:-587}"
+      SMTP_USER: "${SMTP_USER:-}"
+      SMTP_PASSWORD: "${SMTP_PASSWORD:-}"
+      SMTP_FROM: "${SMTP_FROM:-}"
+      SMTP_FROM_NAME: "${SMTP_FROM_NAME:-E-Money App}"
+      OTP_EXPIRY_MINUTES: "${OTP_EXPIRY_MINUTES:-5}"
+    volumes:
+      - ./firebase_service_account.json:/app/firebase_service_account.json:ro
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  mysql:
+    image: mysql:8.4
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: "${DB_NAME:-emoney}"
+      MYSQL_USER: "${DB_USER:-useremoney}"
+      MYSQL_PASSWORD: "${DB_PASSWORD:-Password#123}"
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD:-rootpassword}"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD:-rootpassword}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7.2-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  mysql_data:
+  redis_data:
