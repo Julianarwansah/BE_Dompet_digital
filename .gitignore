@@ -1,0 +1,16 @@
+.DS_Store
+
+# Local environment and credentials
+.env
+firebase_service_account.json
+*.service-account.json
+
+# Build outputs
+/.cache/
+/tmp/
+/bin/
+*.exe
+*.test
+
+# Go workspace/cache artifacts
+go.work
