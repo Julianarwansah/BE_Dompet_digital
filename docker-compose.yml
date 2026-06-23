@@ -2,7 +2,7 @@ services:
   api:
     build: .
     ports:
-      - "${PORT:-8080}:8080"
+      - "8081:8080"
     environment:
       PORT: 8080
       DB_HOST: mysql
