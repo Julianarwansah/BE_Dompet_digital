@@ -166,6 +166,10 @@ docker compose down -v
 
 File collection Postman ada di folder `postman/`. Import ke Postman buat coba-coba semua endpoint.
 
+## Demo Video
+
+📺 [YouTube — APP Dompet Digital & APP Pasar Malam](https://youtu.be/FbgJiSlCbQc?si=o25bBbH71duQvz4X)
+
 ## Proyek Terkait
 
 | Proyek | Link | Hubungan |
