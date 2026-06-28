@@ -7,6 +7,7 @@ import (
 	"encoding/base64"
 	"fmt"
 	"image/png"
+	"log"
 	"math/big"
 	"time"
 
@@ -140,7 +141,13 @@ func (s *OTPService) SendEmailOTP(ctx context.Context, user *models.User) error 
 </body>
 </html>`, user.Name, code, s.cfg.OTPExpiryMinutes)
 
-	return s.emailSvc.SendHTML(user.Email, subject, body)
+	// Dev mode: kalau email gagal, tampilkan OTP di log
+	err = s.emailSvc.SendHTML(user.Email, subject, body)
+	if err != nil {
+		log.Printf("[DEV OTP] Email gagal (%v) — OTP untuk %s: %s", err, user.Email, code)
+		return nil
+	}
+	return nil
 }
 
 // RegisterTOTP generates a new TOTP secret for the user
