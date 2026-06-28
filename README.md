@@ -168,11 +168,11 @@ File collection Postman ada di folder `postman/`. Import ke Postman buat coba-co
 
 ## Proyek Terkait
 
-| Folder | Hubungan |
-|--------|----------|
-| [📂 `dompet_digital`](../dompet_digital) | Flutter app (frontend) yang pakai backend ini |
-| [📂 `be_pasar_malam`](../be_pasar_malam) | Backend pasangan — share Firebase Auth yang sama |
-| [📂 `pasar_malam`](../pasar_malam) | Flutter app marketplace — bisa bayar pakai dompet dari backend ini |
+| Proyek | Link | Hubungan |
+|--------|------|----------|
+| `Dompet_digital` | [GitHub](https://github.com/Julianarwansah/Dompet_digital.git) | Flutter app (frontend) yang pakai backend ini |
+| `be_pasar_malam` | [GitHub](https://github.com/Julianarwansah/be_pasar_malam.git) | Backend pasangan — share Firebase Auth yang sama |
+| `apk_pasar_malam_conect_dompet_digital` | [GitHub](https://github.com/Julianarwansah/apk_pasar_malam_conect_dompet_digital.git) | Flutter app marketplace — bisa bayar pakai dompet dari backend ini |
 
 ## Environment Variables
 
